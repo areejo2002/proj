@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'invisible chef',
+      title: 'Your App Title',
       home: FirstPage(), // or the initial page you want to show
     );
   }

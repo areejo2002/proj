@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
-import 'first_page.dart';
 import 'mannahno_page.dart';
-class secondPage extends StatelessWidget {
+import 'newuser_page.dart';
+import 'food_types.dart';
+import 'first_page.dart';
+
+
+
+class secondPage extends StatefulWidget {
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<secondPage> {
+  // تعريف متغير لتحديد ما إذا كان يجب عرض كلمة المرور أم لا
+  bool _showPassword = false;
+  late TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +113,8 @@ class secondPage extends StatelessWidget {
                       left: 68,
                       top: 523,
                       child: SizedBox(
-                        width: 224,
-                        height: 40,
+                        width: 250,
+                        height: 50,
                         child: TextField(
                           decoration: InputDecoration(
                             labelText: 'اسم المستخدم',
@@ -101,16 +127,31 @@ class secondPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 68,
-                      top: 595,
+                      top: 600,
                       child: SizedBox(
-                        width: 224,
-                        height: 40,
+                        width: 250,
+                        height: 50,
                         child: TextField(
-                          obscureText: true,
+                          controller: _passwordController,
+                          obscureText: !_showPassword, // استخدام قيمة معكوسة لعرض/إخفاء كلمة المرور
                           decoration: InputDecoration(
                             labelText: 'كلمة المرور',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            // إضافة زر لتبديل رؤية كلمة المرور
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                // تبديل قيمة المتغير لعرض/إخفاء كلمة المرور
+                                setState(() {
+                                  _showPassword = !_showPassword;
+                                });
+                              },
                             ),
                           ),
                         ),
@@ -120,14 +161,20 @@ class secondPage extends StatelessWidget {
                       left: 110,
                       top: 695,
                       child: ElevatedButton(
-                        onPressed: () {
-                          // أضف هنا الإجراء الذي ترغب في تنفيذه عند الضغط على الزر
-                        },
+
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => foodtypes()),
+      );
+    },
                         style: ElevatedButton.styleFrom(
                           primary: Color(0xFF156260), // لون الخلفية
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0), // شكل الحواف
                           ),
+                          elevation: 8, // ارتفاع الظل
+
                         ),
                         child: Text(
                           'تــسـجــيــل',
@@ -137,19 +184,19 @@ class secondPage extends StatelessWidget {
                             fontFamily: 'Tajawal',
                             fontWeight: FontWeight.w500,
                             height: 0,
+
                           ),
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 142,
-                      top: 642,
+                      left: 50,
+                      top: 660,
                       child: InkWell(
                         onTap: () {
-                          // استخدم Navigator للانتقال إلى صفحة التسجيل الثانية
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => FirstPage()),
+                            MaterialPageRoute(builder: (context) => foodtypes()),
                           );
                         },
                         child: SizedBox(
@@ -170,8 +217,8 @@ class secondPage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 197,
-                      top: 642,
+                      left: 100,
+                      top: 660,
                       child: SizedBox(
                         width: 132,
                         height: 16,
@@ -190,18 +237,21 @@ class secondPage extends StatelessWidget {
                     Positioned(
                       left: 110,
                       top: 760,
-                      child: SizedBox(
-                        width: 250,
-                        height: 30,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => newuserPage()),
+                          );
+                        },
                         child: Text(
-                          'ليس لديك حساب؟ '
-                              ' تــسجـيـل مـستخــدم جـديـد',
+                          'ليس لديك حساب؟ تــسجـيـل مـستخــدم جـديـد',
                           style: TextStyle(
                             color: Color(0xFF156260),
                             fontSize: 14,
                             fontFamily: 'Tajawal',
                             fontWeight: FontWeight.w400,
-                             height: 0,
+                            height: 0,
                           ),
                         ),
                       ),
@@ -210,29 +260,27 @@ class secondPage extends StatelessWidget {
                 ),
               ),
             ),
-        Positioned(
-            left: 128,
-            top: 570,
-          child: GestureDetector(
-            onTap: () {
-
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => mannahnopage()),
-              );
-            },
-
-              child: Text(
-                'مــــن نـــحــن',
-                style: TextStyle(
-                  color: Color(0xFF156260),
-                  fontSize: 24,
-                  fontFamily: 'Tajawal',
-                  fontWeight: FontWeight.w500,
-                  height: 0,
+            Positioned(
+              left: 128,
+              top: 570,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => mannahnopage()),
+                  );
+                },
+                child: Text(
+                  'مــــن نـــحــن',
+                  style: TextStyle(
+                    color: Color(0xFF156260),
+                    fontSize: 24,
+                    fontFamily: 'Tajawal',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
                 ),
               ),
-          )
             ),
             Positioned(
               left: 100,
@@ -248,7 +296,6 @@ class secondPage extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),
