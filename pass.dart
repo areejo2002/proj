@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'newuser_page.dart';
+import 'otp.dart'; // استيراد صفحة otp.dart
 
-class otp extends StatelessWidget {
+class pass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('رسالة التحقق'),
+        title: Text('هل نسيت كلمة المرور'),
       ),
       body: Stack(
         children: [
@@ -35,10 +37,10 @@ class otp extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 30,
+            left: 70,
             top: 180,
             child: Text(
-              'قم بإدخال الرمز الذي أرسل لك',
+              'هل نسيت كلمة المرور؟',
               style: TextStyle(
                 color: Color(0xFF156260),
                 fontSize: 27,
@@ -49,86 +51,84 @@ class otp extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 30,
+            left: 1,
             top: 250,
-            child: Row(
+            child: SizedBox(
+              width: 280,
+              height: 40,
+              child: Text(
+                'قم بإدخال بريدك الإلكتروني',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color(0xFF505050),
+                  fontSize: 18,
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w500,
+                  height: 0.08,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -14,
+            top: 270,
+            child: SizedBox(
+              width: 290,
+              height: 40,
+              child: Text(
+                'وسنقوم بإرسال رسالة تحقق',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color(0xFF505050),
+                  fontSize: 18,
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w500,
+                  height: 0.08,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 40,
+            top: 300,
+            child: SizedBox(
+              width: 300,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'ادخل بريدك الإلكتروني',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'Tajawal',
+                  ),
+                ),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Tajawal',
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 240,
+            top: 360,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: 70,
-                  height: 40,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      hintText: '',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                        fontFamily: 'Tajawal',
-                      ),
-                    ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => otp()), // الانتقال إلى صفحة otp.dart
+                    );
+                  },
+                  child: Text(
+                    'ارسل رسالة إلى هاتفي',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Color(0xFF156260),
+                      fontSize: 12,
                       fontFamily: 'Tajawal',
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 70,
-                  height: 40,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      hintText: '',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                        fontFamily: 'Tajawal',
-                      ),
-                    ),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Tajawal',
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 70,
-                  height: 40,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      hintText: '',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                        fontFamily: 'Tajawal',
-                      ),
-                    ),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Tajawal',
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  width: 70,
-                  height: 40,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      hintText: '',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                        fontFamily: 'Tajawal',
-                      ),
-                    ),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Tajawal',
+                      fontWeight: FontWeight.w300,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
@@ -136,47 +136,61 @@ class otp extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 230,
-            top: 295,
-            child: Text(
-              'أرسل الرمز مرة أخرى',
-              style: TextStyle(
-                color: Color(0xFF156260),
-                fontSize: 14,
-                fontFamily: 'Tajawal',
-                fontWeight: FontWeight.w300 ,
-                decoration: TextDecoration.underline,
+            left: 40,
+            top: 430,
+            child: SizedBox(
+              width: 300,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 2,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'أو',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 20,
+                        fontFamily: 'Tajawal',
+                        fontWeight: FontWeight.w300,
 
-                height: 0,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 2,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
           Positioned(
-            left: 95,
-            top: 380,
-            child: ElevatedButton(
-              onPressed: () {
-                // يمكنك إضافة الإجراء المطلوب هنا
+            left: 100,
+            top: 500,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => newuserPage()),
+                );
               },
-              child: Container(
-                width: 150, // تعيين عرض الزر إلى 200 وحدة
-                child: Center(
-                  child: Text(
-                    'تحقق',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Tajawal',
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF156260),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: Color(0xFF156260)),
+              child: Text(
+                ' تسجيل مستخدم جديد',
+                style: TextStyle(
+                  color: Color(0xFF156260),
+                  fontSize: 22,
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w400,
+                  decoration: TextDecoration.underline,
+                  height: 0,
                 ),
               ),
             ),
