@@ -186,13 +186,14 @@ class _NewPassState extends State<newpass> {
                       top: 700,
                       child: ElevatedButton(
                         onPressed: () {
+                          // Navigate to SecondPage
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => newpass()),
-                          ); // يمكنك إضافة الإجراء المطلوب هنا
+                            MaterialPageRoute(builder: (context) => secondpage()),
+                          );
                         },
                         child: Container(
-                          width: 150, // تعيين عرض الزر إلى 200 وحدة
+                          width: 150,
                           child: Center(
                             child: Text(
                               'حفظ',
