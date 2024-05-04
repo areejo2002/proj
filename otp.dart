@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'newpass.dart';
 class otp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -156,7 +156,10 @@ class otp extends StatelessWidget {
             top: 380,
             child: ElevatedButton(
               onPressed: () {
-                // يمكنك إضافة الإجراء المطلوب هنا
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => newpass()),
+                ); // يمكنك إضافة الإجراء المطلوب هنا
               },
               child: Container(
                 width: 150, // تعيين عرض الزر إلى 200 وحدة
