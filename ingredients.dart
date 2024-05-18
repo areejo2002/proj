@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'recipepage.dart';
+import 'navbar.dart';
+import 'second_page.dart';
+import 'profile.dart';
+import 'favourite.dart';
 class ingredients extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,12 +23,10 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isPastaSauceSelected = false;
   bool isFlourSelected = false;
   bool isPastaSelected = false;
-
   bool isChickenSelected = false;
   bool isGroundBeefSelected = false;
   bool isTunaSelected = false;
   bool isMilkSelected = false;
-
   bool isTomatoSelected = false;
   bool isEggplantSelected = false;
   bool isOliveSelected = false;
@@ -32,6 +34,35 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isGarlicSelected = false;
   bool isBellPepperSelected = false;
   bool isGingerSelected = false;
+
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => favourite(),
+          ),
+        );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => profile(),
+          ),
+        );
+      } else if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => secondPage(),
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -280,38 +311,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecipePage()),
+                        MaterialPageRoute(builder: (context) => recipepage()),
                       );
                     },
-    child: Text(
-    'اختيار',
-    style: TextStyle(
-    color: Color(0xFF156260), // تغيير لون النص هنا
-    ),
-    ),
-    style: ElevatedButton.styleFrom(
-    primary: Colors.white,
-    ),
-    )
+                    child: Text(
+                      'اختيار',
+                      style: TextStyle(
+                        color: Color(0xFF156260), // تغيير لون النص هنا
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class RecipePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('صفحة الوصفة'),
-      ),
-      body: Center(
-        child: Text('هذه هي صفحة الوصفة'),
+      bottomNavigationBar: CustomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
