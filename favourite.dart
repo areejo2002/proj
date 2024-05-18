@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'redsause.dart';
+import 'second_page.dart';
+import 'profile.dart';
 
 class favourite extends StatefulWidget {
   @override
@@ -7,6 +9,36 @@ class favourite extends StatefulWidget {
 }
 
 class _FavouriteState extends State<favourite> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => favourite(),
+          ),
+        );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => profile(),
+          ),
+        );
+      } else if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => secondPage(),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +68,7 @@ class _FavouriteState extends State<favourite> {
                     },
                   ),
                   SizedBox(height: 16),
-                  // أضف المزيد من الأزرار هنا إذا لزم الأمر
+                  // Add more recipe tiles here if needed
                 ],
               ),
             ),
@@ -55,12 +87,12 @@ class _FavouriteState extends State<favourite> {
       ) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.0),
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(16.0), // Increased padding for more space
       decoration: BoxDecoration(
-        color: Color(0xFFE1EDED), // لون أفتح من لون الإطار
+        color: Color(0xFFE1EDED),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Color(0xFF156260), // اللون المحدد لإطار المستطيل
+          color: Color(0xFF156260),
           width: 2,
         ),
         boxShadow: [
@@ -73,15 +105,34 @@ class _FavouriteState extends State<favourite> {
       ),
       child: ListTile(
         onTap: onPressed,
-        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        leading: Image.asset(imagePath, width: 50, height: 50, fit: BoxFit.cover), // الصورة على الجانب الأيسر
-        title: Text(
-          recipeName,
-          style: TextStyle(fontSize: 18, color: Color(0xFF156260), fontWeight: FontWeight.bold),
+        contentPadding: EdgeInsets.zero,
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Image.asset(
+            imagePath,
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+        ),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            recipeName,
+            style: TextStyle(
+              fontSize: 20,
+              color: Color(0xFF156260),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         subtitle: Text(
           'الوقت المستغرق: $preparationTime',
-          style: TextStyle(fontSize: 12, color: Color(0xFF156260), fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 14,
+            color: Color(0xFF156260),
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
