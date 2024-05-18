@@ -4,7 +4,11 @@ import 'newuser_page.dart';
 import 'food_types.dart';
 import 'first_page.dart';
 import 'ingredients.dart';
-
+import 'pass.dart';
+import 'newpass.dart';
+import 'profile.dart';
+import 'favourite.dart';
+import 'food_types.dart'; // Import the types.dart page
 
 class secondPage extends StatefulWidget {
   @override
@@ -12,7 +16,6 @@ class secondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<secondPage> {
-  // تعريف متغير لتحديد ما إذا كان يجب عرض كلمة المرور أم لا
   bool _showPassword = false;
   late TextEditingController _passwordController;
 
@@ -161,20 +164,18 @@ class _SecondPageState extends State<secondPage> {
                       left: 110,
                       top: 695,
                       child: ElevatedButton(
-
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => foodtypes()),
-      );
-    },
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => foodtypes()),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: Color(0xFF156260), // لون الخلفية
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0), // شكل الحواف
                           ),
                           elevation: 8, // ارتفاع الظل
-
                         ),
                         child: Text(
                           'تــسـجــيــل',
@@ -184,7 +185,6 @@ class _SecondPageState extends State<secondPage> {
                             fontFamily: 'Tajawal',
                             fontWeight: FontWeight.w500,
                             height: 0,
-
                           ),
                         ),
                       ),
@@ -219,17 +219,26 @@ class _SecondPageState extends State<secondPage> {
                     Positioned(
                       left: 100,
                       top: 660,
-                      child: SizedBox(
-                        width: 132,
-                        height: 16,
-                        child: Text(
-                          'هل نسيت كلمة المرور ؟',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontFamily: 'Tajawal',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
+                      child: InkWell(
+                        onTap: () {
+                          // Navigate to pass.dart when the text is tapped
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => pass()),
+                          );
+                        },
+                        child: SizedBox(
+                          width: 132,
+                          height: 16,
+                          child: Text(
+                            'هل نسيت كلمة المرور ؟',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontFamily: 'Tajawal',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
                           ),
                         ),
                       ),
@@ -282,6 +291,7 @@ class _SecondPageState extends State<secondPage> {
                 ),
               ),
             ),
+
             Positioned(
               left: 100,
               top: 200,
@@ -299,6 +309,10 @@ class _SecondPageState extends State<secondPage> {
           ],
         ),
       ),
+
     );
+
   }
+
+
 }
