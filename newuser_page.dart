@@ -183,33 +183,33 @@ class newuserPage extends StatelessWidget {
                 ),
               ),
             ),
-        Positioned(
-          left: 110,
-          top:600,
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>foodtypes()),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xFF156260), // ل الخلفية
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0), // شكل الحواف
-              ),
-            ),
-              child: Text(
-                'تــسـجــيــل',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontFamily: 'Tajawal',
-                  fontWeight: FontWeight.w500,
-                  height: 0,
+            Positioned(
+              left: 110,
+              top:600,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>foodtypes()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF156260), // ل الخلفية
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0), // شكل الحواف
+                  ),
                 ),
-              ),
-            ),)
+                child: Text(
+                  'تــسـجــيــل',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontFamily: 'Tajawal',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
+                ),
+              ),)
           ],
         ),
       ),
