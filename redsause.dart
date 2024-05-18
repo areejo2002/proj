@@ -1,6 +1,46 @@
 import 'package:flutter/material.dart';
+import 'recipepage.dart';
+import 'navbar.dart';
+import 'second_page.dart';
+import 'profile.dart';
+import 'favourite.dart';
 
-class redsauce extends StatelessWidget {
+class redsauce extends StatefulWidget {
+  @override
+  _RedsauceState createState() => _RedsauceState();
+}
+
+class _RedsauceState extends State<redsauce> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => favourite(),
+          ),
+        );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => profile(),
+          ),
+        );
+      } else if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => secondPage(),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,23 +81,23 @@ class redsauce extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 8),
-                buildIngredientRow([
-                  Ingredient(name: 'معكرونة', imagePath: 'assets/معكرونه.jpg', quantity: '200 غرام', smallText: true, textColor: Colors.black),
-                  Ingredient(name: 'زيت الزيتون', imagePath: 'assets/زيت.jpg', quantity: '2 ملعقة كبيرة', smallText: true, textColor: Colors.black),
-                  Ingredient(name: 'الثوم', imagePath: 'assets/ثومه.jpg', quantity: '3 فصوص', smallText: true, textColor: Colors.black),
-                ]),
-                SizedBox(height: 16),
-                buildIngredientRow([
-                  Ingredient(name: 'صوص المعكرونة', imagePath: 'assets/صوص.jpg', quantity: '1 كوب', smallText: true, textColor: Colors.black),
-                  Ingredient(name: 'إكليل الجبل', imagePath: 'assets/اكليل.jpg', quantity: '1 ملعقة صغيرة', smallText: true, textColor: Colors.black),
-                  Ingredient(name: 'ريحان', imagePath: 'assets/ريحان.jpg', quantity: '2 ملعقة صغيرة', smallText: true, textColor: Colors.black),
-                ]),
-                SizedBox(height: 16),
-                buildIngredientRow([
-                  Ingredient(name: 'هيل', imagePath: 'assets/هيل.jpg', quantity: '1/2 ملعقة صغيرة', smallText: true, textColor: Colors.black),
-                  Ingredient(name: 'ملح', imagePath: 'assets/ملح.jpg', quantity: 'حسب الذوق', smallText: true, textColor: Colors.black),
-                  Ingredient(name: 'فلفل أسود', imagePath: 'assets/فلفل.jpg', quantity: 'حسب الذوق', smallText: true, textColor: Colors.black),
-                ]),
+                Text(
+                  '200 غرام معكرونة\n'
+                      '2 ملعقة كبيرة زيت الزيتون\n'
+                      '3 فصوص الثوم\n'
+                      '1 كوب صوص المعكرونة\n'
+                      '1 ملعقة صغيرة إكليل الجبل\n'
+                      '2 ملعقة صغيرة ريحان\n'
+                      '1/2 ملعقة صغيرة هيل\n'
+                      'ملح حسب الذوق\n'
+                      'فلفل أسود حسب الذوق',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    height: 1.5, // Adjust line height for readability
+                  ),
+                  textAlign: TextAlign.right, // Align text to the right
+                ),
                 SizedBox(height: 16),
                 Directionality(
                   textDirection: TextDirection.rtl,
@@ -79,70 +119,16 @@ class redsauce extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
-                SizedBox(height: 32), // مسافة في نهاية الصفحة
+                SizedBox(height: 32), // Space at the end of the page
               ],
             ),
           ),
         ],
       ),
+      bottomNavigationBar: CustomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
-
-  Widget buildIngredientRow(List<Ingredient> ingredients) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: ingredients.map((ingredient) => buildIngredient(ingredient)).toList(),
-    );
-  }
-
-  Widget buildIngredient(Ingredient ingredient) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Color(0xFF156260), // لون الحدود
-              width: 2.0, // عرض الحدود
-            ),
-          ),
-          child: CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage(ingredient.imagePath),
-          ),
-        ),
-        SizedBox(height: 4), // تقليل المسافة بين الصورة والنص
-
-        Text(
-          ingredient.name,
-          style: TextStyle(fontSize: ingredient.smallText ? 14 : 18, color: ingredient.textColor),
-        ),
-        if (ingredient.quantity != null) SizedBox(height: 4), // تقليل المسافة بين النصوص
-
-        if (ingredient.quantity != null)
-          Text(
-            ingredient.quantity!,
-            style: TextStyle(fontSize: ingredient.smallText ? 12 : 14, color: ingredient.textColor),
-          ),
-      ],
-    );
-  }
-}
-
-class Ingredient {
-  final String name;
-  final String imagePath;
-  final String? quantity;
-  final bool smallText;
-  final bool largeText;
-  final Color textColor;
-
-  Ingredient({
-    required this.name,
-    required this.imagePath,
-    this.quantity,
-    this.smallText = false,
-    this.largeText = false,
-    this.textColor = Colors.black,
-  });
 }
