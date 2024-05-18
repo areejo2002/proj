@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'profile.dart';
 import 'second_page.dart';
-
+import 'first_page.dart';
+import 'navbar.dart';
+import 'second_page.dart';
+import 'profile.dart';
+import 'favourite.dart';
 class newpass extends StatefulWidget {
   @override
   _NewPassState createState() => _NewPassState();
@@ -11,6 +15,7 @@ class _NewPassState extends State<newpass> {
   bool _showPassword = false;
   late TextEditingController _passwordController;
   late TextEditingController _confirmPasswordController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -24,6 +29,34 @@ class _NewPassState extends State<newpass> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => favourite(),
+          ),
+        );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => profile(),
+          ),
+        );
+      } else if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => secondPage(),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -186,10 +219,10 @@ class _NewPassState extends State<newpass> {
                       top: 700,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigate to SecondPage
+                          // Navigate to Profile page
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => secondpage()),
+                            MaterialPageRoute(builder: (context) => profile()),
                           );
                         },
                         child: Container(
@@ -221,6 +254,10 @@ class _NewPassState extends State<newpass> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
